@@ -72,9 +72,9 @@ export default function Upload() {
 
         ))}
 
-      </div>
+      
 
-
+</div>
     </div>
   );
 }

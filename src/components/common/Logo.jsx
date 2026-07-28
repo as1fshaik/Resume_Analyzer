@@ -1,19 +1,26 @@
-import { Sparkles } from 'lucide-react';
+import { Link } from "react-router-dom";
+import logo from "../../assets/Hirable_logo.png";
 
-export default function Logo({ className = '' }) {
+export default function Logo({ className = "" }) {
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-primary/10 border border-brand-primary/30 shadow-sm shadow-brand-primary/20">
-        <Sparkles className="h-5 w-5 text-brand-primary" />
-      </div>
-      <div className="flex flex-col">
-        <span className="text-base font-bold tracking-tight text-brand-text">
-          Resume Analyzer
+    <Link to="/" className={`flex items-center gap-3 hover:opacity-90 transition-opacity ${className}`}>
+      {/* Logo */}
+      <img
+        src={logo}
+        alt="Hirable Logo"
+        className="h-14 w-14 object-contain"
+      />
+
+      {/* Brand */}
+      <div className="flex flex-col leading-none">
+        <span className="text-xl font-extrabold tracking-tight text-brand-text">
+          Hirable
         </span>
-        <span className="text-[10px] font-medium text-brand-primary tracking-widest uppercase">
-          AI Powered
+
+        <span className="mt-1 text-[10px] uppercase tracking-[0.3em] text-brand-primary">
+          Stand Out. Get Hired.
         </span>
       </div>
-    </div>
+    </Link>
   );
 }

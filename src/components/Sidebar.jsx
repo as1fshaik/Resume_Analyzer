@@ -11,6 +11,7 @@ export default function Sidebar({ isOpen, onClose }) {
         <div
           onClick={onClose}
           className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden transition-opacity duration-300"
+          aria-hidden="true"
         />
       )}
 
@@ -21,7 +22,7 @@ export default function Sidebar({ isOpen, onClose }) {
         }`}
       >
         {/* Header with Logo and Mobile Close Button */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-8 shrink-0">
           <Logo />
           <button
             onClick={onClose}
@@ -32,8 +33,8 @@ export default function Sidebar({ isOpen, onClose }) {
           </button>
         </div>
 
-        {/* Navigation Items */}
-        <nav className="flex-1 space-y-1">
+        {/* Scrollable Navigation Items */}
+        <nav className="flex-1 overflow-y-auto min-h-0 space-y-1 my-2 pr-1 scrollbar-thin">
           {NAVIGATION_ITEMS.map((item) => {
             const Icon = item.icon;
             return (
@@ -52,7 +53,7 @@ export default function Sidebar({ isOpen, onClose }) {
                 {({ isActive }) => (
                   <>
                     <Icon className={`h-4.5 w-4.5 transition-colors ${isActive ? 'text-brand-primary' : 'text-brand-text-dim group-hover:text-brand-text'}`} />
-                    <span>{item.title}</span>
+                    <span className="truncate">{item.title}</span>
                   </>
                 )}
               </NavLink>
@@ -60,16 +61,10 @@ export default function Sidebar({ isOpen, onClose }) {
           })}
         </nav>
 
-        {/* Footer Card / Placeholder (Inspired by 'Upgrade to Pro' block in mockup) */}
-        <div className="mt-auto bg-brand-card border border-brand-border rounded-2xl p-4 text-center">
-          <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand-primary/10 text-brand-primary mb-3">
-            <span className="text-xs font-bold">PRO</span>
-          </div>
-          <h4 className="text-xs font-bold text-brand-text mb-1">Upgrade to Pro</h4>
-          <p className="text-[10px] text-brand-text-dim mb-3">Unlock ATS analysis and detailed scoring insights.</p>
-          <button className="w-full bg-brand-primary hover:bg-brand-primary-hover text-white text-[11px] font-bold py-2 px-3 rounded-xl transition-all cursor-pointer">
-            Upgrade Now
-          </button>
+        {/* Footer Credits / Free Platform Badge */}
+        <div className="mt-auto bg-brand-card border border-brand-border rounded-2xl p-4 text-center shrink-0">
+          <h4 className="text-xs font-bold text-brand-text mb-1">Hirable</h4>
+          <p className="text-[10px] text-brand-text-dim">Free AI Resume Analysis. Stand Out. Get Hired.</p>
         </div>
       </aside>
     </>

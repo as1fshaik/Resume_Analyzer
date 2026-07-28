@@ -7,6 +7,7 @@ import Upload from '../pages/Upload';
 import Results from '../pages/Results';
 import History from '../pages/History';
 import Profile from '../pages/Profile';
+import ProtectedRoute from '../components/common/ProtectedRoute';
 
 export const router = createBrowserRouter([
   {
@@ -18,28 +19,33 @@ export const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: '/',
-    element: <DashboardLayout />,
+    element: <ProtectedRoute />,
     children: [
       {
-        path: 'dashboard',
-        element: <Dashboard />,
-      },
-      {
-        path: 'upload',
-        element: <Upload />,
-      },
-      {
-        path: 'results',
-        element: <Results />,
-      },
-      {
-        path: 'history',
-        element: <History />,
-      },
-      {
-        path: 'profile',
-        element: <Profile />,
+        path: '/',
+        element: <DashboardLayout />,
+        children: [
+          {
+            path: 'dashboard',
+            element: <Dashboard />,
+          },
+          {
+            path: 'upload',
+            element: <Upload />,
+          },
+          {
+            path: 'results',
+            element: <Results />,
+          },
+          {
+            path: 'history',
+            element: <History />,
+          },
+          {
+            path: 'profile',
+            element: <Profile />,
+          },
+        ],
       },
     ],
   },

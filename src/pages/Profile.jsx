@@ -1,16 +1,36 @@
-import { User, Mail, Calendar, Shield, Sparkles } from 'lucide-react';
+import { User, Mail, Calendar, Shield, LogOut } from 'lucide-react';
 import Card from '../components/common/Card';
+import Button from '../components/common/Button';
 import { useAnalysis } from '../context/AnalysisContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function Profile() {
+  const { user, logout } = useAuth();
   const { history } = useAnalysis();
 
+  const getInitials = (name) => {
+    if (!name) return 'U';
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase();
+  };
+
+  const creationTime = user?.metadata?.creationTime
+    ? new Date(user.metadata.creationTime).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : 'Unknown';
+
   const profile = {
-    name: 'Asif Ali',
-    email: 'asif@example.com',
-    plan: 'Free Plan',
-    memberSince: 'July 2026',
-    totalAnalyses: history.length,
+    name: user?.displayName || 'User',
+    email: user?.email || 'No email associated',
+    provider: 'Google Authentication',
+    memberSince: creationTime,
+    totalAnalyses: history ? history.length : 0,
   };
 
   return (
@@ -20,27 +40,46 @@ export default function Profile() {
         <p className="text-xs text-brand-text-dim mt-1">Manage your account information</p>
       </div>
 
-      {/* Profile header */}
+      {/* Profile header card */}
       <Card>
-        <div className="flex flex-col sm:flex-row items-center gap-6">
-          <div className="relative">
-            <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-brand-primary/20 border-2 border-brand-primary/30 text-2xl font-black text-brand-primary">
-              AA
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+            <div className="relative">
+              {user?.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  alt={profile.name}
+                  className="h-20 w-20 rounded-2xl border-2 border-brand-primary/30 object-cover"
+                />
+              ) : (
+                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-brand-primary/20 border-2 border-brand-primary/30 text-2xl font-black text-brand-primary">
+                  {getInitials(profile.name)}
+                </div>
+              )}
+              <span className="absolute bottom-0 right-0 h-4 w-4 rounded-full bg-brand-success border-2 border-brand-card" />
             </div>
-            <span className="absolute bottom-0 right-0 h-4 w-4 rounded-full bg-brand-success border-2 border-brand-card" />
+            <div>
+              <h3 className="text-xl font-bold text-brand-text">{profile.name}</h3>
+              <p className="text-sm text-brand-text-muted">{profile.email}</p>
+              <span className="inline-flex items-center gap-1.5 mt-2 text-xs font-bold text-brand-primary bg-brand-primary/10 border border-brand-primary/20 px-3 py-1 rounded-full">
+                {profile.provider}
+              </span>
+            </div>
           </div>
-          <div className="text-center sm:text-left">
-            <h3 className="text-xl font-bold text-brand-text">{profile.name}</h3>
-            <p className="text-sm text-brand-text-muted">{profile.email}</p>
-            <span className="inline-flex items-center gap-1.5 mt-2 text-xs font-bold text-brand-primary bg-brand-primary/10 border border-brand-primary/20 px-3 py-1 rounded-full">
-              <Sparkles className="h-3.5 w-3.5" />
-              {profile.plan}
-            </span>
-          </div>
+
+          <Button
+            variant="secondary"
+            size="md"
+            icon={LogOut}
+            onClick={logout}
+            className="w-full sm:w-auto hover:bg-brand-error/10 hover:text-brand-error hover:border-brand-error/20"
+          >
+            Logout
+          </Button>
         </div>
       </Card>
 
-      {/* Details */}
+      {/* Profile Details List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Card>
           <div className="flex items-center gap-3">
@@ -95,7 +134,7 @@ export default function Profile() {
         <p className="text-sm text-brand-text-muted leading-relaxed">
           This application analyzes resume-job compatibility using a three-tier architecture:
           React frontend, Node.js API gateway, and FastAPI AI service for resume parsing and
-          skill matching. All analyses are processed locally during demo sessions.
+          skill matching. This submission uses Firebase Authentication to support secure Google logins.
         </p>
       </Card>
     </div>

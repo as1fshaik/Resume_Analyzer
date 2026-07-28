@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import ResumeCard from "./ResumeCard";
 import CompatibilityCircle from "./CompatibilityCircle";
 import FloatingCards from "./FloatingCards";
-import ConnectorLines from "./ConnectorLines";
+import ConnectorLines from "./connectorLines";
 
 export default function HeroAnimation() {
   return (

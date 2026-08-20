@@ -4,6 +4,7 @@ import { UploadCloud, FileText, CheckCircle, AlertOctagon, Loader2, Sparkles, Re
 import Button from '../common/Button';
 import Card from '../common/Card';
 import { useAnalysis } from '../../context/AnalysisContext';
+import { API_URL } from '../../constants';
 
 export default function ResumeUpload() {
   const { saveAnalysis } = useAnalysis();
@@ -147,7 +148,7 @@ export default function ResumeUpload() {
     formData.append('resume', file);
 
     try {
-      const response = await fetch('http://localhost:5000/api/resume/upload', {
+      const response = await fetch(`${API_URL}/api/resume/upload`, {
         method: 'POST',
         body: formData,
       });
@@ -204,7 +205,7 @@ export default function ResumeUpload() {
 
     try {
       console.log("[2] Sending /api/resume/analyze");
-      const response = await fetch('http://localhost:5000/api/resume/analyze', {
+      const response = await fetch(`${API_URL}/api/resume/analyze`, {
         method: 'POST',
         body: formData,
       });

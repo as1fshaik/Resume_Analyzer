@@ -9,7 +9,7 @@ const router = express.Router();
 // Store uploaded files temporarily
 const upload = multer({ dest: "uploads/" });
 
-const AI_SERVICE_URL = "http://127.0.0.1:8000";
+const AI_SERVICE_URL = process.env.AI_SERVICE_URL || "http://127.0.0.1:8000";
 
 /**
  * Creates FormData containing the uploaded resume file.

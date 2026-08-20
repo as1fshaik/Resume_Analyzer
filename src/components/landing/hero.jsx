@@ -99,8 +99,12 @@ export default function Hero() {
           </div>
 
           {/* RIGHT */}
-          <div className="flex justify-center lg:justify-end pt-12 lg:pt-32">
-            <HeroAnimation />
+          <div className="flex justify-center lg:justify-end pt-4 lg:pt-20 overflow-hidden w-full">
+            <div className="flex items-center justify-center w-full max-w-[440px] mx-auto lg:mx-0 h-[460px] lg:h-[580px]">
+              <div className="scale-[0.7] sm:scale-90 lg:scale-100 origin-center transition-transform shrink-0">
+                <HeroAnimation />
+              </div>
+            </div>
           </div>
         </div>
       </div>

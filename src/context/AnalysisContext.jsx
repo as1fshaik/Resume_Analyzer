@@ -82,6 +82,7 @@ export function AnalysisProvider({ children }) {
     } else {
       setHistory([]);
       setCurrentAnalysis(null);
+      localStorage.removeItem(STORAGE_KEY);
     }
   }, [user, fetchAnalyses]);
 
@@ -127,9 +128,11 @@ export function AnalysisProvider({ children }) {
             id: docRef.id,
           };
           setCurrentAnalysis(finalEntry);
-          setHistory((prev) =>
-            prev.map((item) => (item.id === localId ? finalEntry : item))
-          );
+          setHistory((prev) => {
+            const updated = prev.map((item) => (item.id === localId ? finalEntry : item));
+            saveLocalFallback(updated);
+            return updated;
+          });
         })
         .catch((err) => {
           console.error('Firestore save failed:', err);

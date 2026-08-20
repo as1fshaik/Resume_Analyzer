@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import Logo from "./common/Logo";

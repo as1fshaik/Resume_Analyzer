@@ -49,7 +49,7 @@ export default function Navbar() {
       transition={{ duration: 0.35, ease: "easeInOut" }}
       className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-brand-bg-start/30 border-b border-white/5"
     >
-      <div className="max-w-7xl mx-auto h-20 px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto h-16 sm:h-20 px-4 sm:px-6 flex items-center justify-between">
 
         {/* Logo */}
         <Logo />
@@ -79,10 +79,10 @@ export default function Navbar() {
         </nav>
 
         {/* Right Buttons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {user ? (
             <>
-              <div className="flex items-center gap-3 mr-2">
+              <div className="hidden md:flex items-center gap-3 mr-2">
                 {user.photoURL ? (
                   <img
                     src={user.photoURL}
@@ -105,13 +105,15 @@ export default function Navbar() {
                 </Button>
               </Link>
 
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={logout}
-              >
-                Logout
-              </Button>
+              <span className="hidden sm:inline-block">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={logout}
+                >
+                  Logout
+                </Button>
+              </span>
             </>
           ) : (
             <>
@@ -128,7 +130,8 @@ export default function Navbar() {
                   icon={ArrowRight}
                   iconPosition="right"
                 >
-                  Start Free Analysis
+                  <span className="hidden sm:inline">Start Free Analysis</span>
+                  <span className="sm:hidden">Start Free</span>
                 </Button>
               </Link>
             </>

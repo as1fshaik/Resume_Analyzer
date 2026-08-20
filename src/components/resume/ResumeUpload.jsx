@@ -20,7 +20,6 @@ export default function ResumeUpload() {
   
   // Job Matching specific states
   const [jobDescription, setJobDescription] = useState('');
-  const [parsedData, setParsedData] = useState(null);
   
   const fileInputRef = useRef(null);
   const loadingTimerRef = useRef(null);
@@ -161,7 +160,6 @@ export default function ResumeUpload() {
 
       if (data && data.text) {
         setSuccess('Resume parsed successfully!');
-        setParsedData(data);
       } else {
         throw new Error('Failed to extract text from the resume.');
       }
@@ -245,7 +243,6 @@ export default function ResumeUpload() {
     setError(null);
     setSuccess('');
     setFile(null);
-    setParsedData(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }

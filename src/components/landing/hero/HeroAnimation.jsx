@@ -8,7 +8,7 @@ import ConnectorLines from "./connectorLines";
 export default function HeroAnimation() {
   return (
     <motion.div
-      className="relative flex items-center justify-center w-full h-[580px] overflow-visible"
+      className="relative flex items-center justify-center w-[440px] h-[580px] overflow-visible"
       animate={{
         y: [0, -8, 0],
       }}
